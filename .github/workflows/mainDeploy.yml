@@ -2,7 +2,7 @@ name: ⭐ Build and Deploy to Production Site
 on:
   push:
     branches:
-      - develop
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest

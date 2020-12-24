@@ -2,7 +2,7 @@ name: 🏗 Build and Deploy to Dev Site
 on:
   push:
     branches:
-      - main
+      - develop
 jobs:
   build:
     runs-on: ubuntu-latest
