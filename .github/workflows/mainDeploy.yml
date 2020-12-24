@@ -1,4 +1,4 @@
-name: 🏗 Build and Deploy to Dev Site
+name: ⭐ Build and Deploy to Production Site
 on:
   push:
     branches:
