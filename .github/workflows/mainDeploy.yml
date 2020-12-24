@@ -22,7 +22,7 @@ jobs:
           npm install
       - name: Production Build
         run: |
-          npm run build:web
+          npm run build
       - name: Unit Tests
         run: |
           npm run test
