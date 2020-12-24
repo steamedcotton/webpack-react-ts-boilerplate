@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Home /> Renders 1`] = `
+<div
+  className="sc-bdfBwQ iQqEuM"
+>
+  <h1>
+    React App
+  </h1>
+  <h2>
+    Website
+  </h2>
+</div>
+`;

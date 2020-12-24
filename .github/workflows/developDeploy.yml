@@ -1,0 +1,48 @@
+name: 🏗 Build and Deploy to Dev Site
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: NPM Install
+        run: |
+          npm install
+      - name: Production Build
+        run: |
+          npm run build:web
+      - name: Unit Tests
+        run: |
+          npm run test
+
+# UNCOMMENT BELOW FOR DEPLOYMENT
+#      - name: Deploy to S3
+#        uses: jakejarvis/s3-sync-action@master
+#        with:
+#          args: --acl public-read --delete
+#        env:
+#          AWS_S3_BUCKET: ${{ secrets.S3_DEV_SITE_BUCKET }}
+#          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#          AWS_REGION: 'us-west-2'
+#          SOURCE_DIR: 'dist'
+#      - name: Invalidate CloudFront
+#        uses: muratiger/invalidate-cloudfront-and-wait-for-completion-action@master
+#        env:
+#          DISTRIBUTION_ID: ${{ secrets.CF_DEV_DISTRIBUTION_ID }}
+#          PATHS: '/*'
+#          AWS_REGION: 'us-west-2'
+#          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
